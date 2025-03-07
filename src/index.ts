@@ -1,3 +1,5 @@
+import { Response } from "express";
+
 const express = require('express');
 const dotenv = require('dotenv');
 
@@ -6,8 +8,9 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT;
 
-app.get('/', (req, res) => {
-  res.send('Express server');
+app.get('/', (req: Request, res: Response) => {
+  res.send('Welcome to root URL');
+
 });
 
 app.listen(port, () => {
