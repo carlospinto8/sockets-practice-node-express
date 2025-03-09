@@ -11,9 +11,11 @@
   "author": "Carlos Pinto",
   "license": "ISC",
   "dependencies": {
+    "@types/ws": "^8.18.0",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
-    "sockets-practice-node-express": "file:"
+    "sockets-practice-node-express": "file:",
+    "ws": "^8.18.1"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
