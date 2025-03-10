@@ -1,6 +1,6 @@
 (
     function() {
-        let ws: WebSocket;
+        let ws: WebSocket = new WebSocket('http://localhost:3000') ;
         const messages = <HTMLElement>document.getElementById('messages');
         const wsOpen = <HTMLButtonElement>document.getElementById('ws-open');
         const wsClose = <HTMLButtonElement>document.getElementById('ws-close');
@@ -16,15 +16,16 @@
         }
 
         function closeConnection(){
-            if (!!ws) {
+            if (ws) {
                 ws.close();
-            }
+            }           
         }
 
         wsOpen.addEventListener('click', () => {
             closeConnection();
 
             ws = new WebSocket('ws://localhost:3000');
+
 
             ws.addEventListener('error', () => {
                 showMessage('WebSocket Error');
@@ -54,10 +55,11 @@
                 return;
             }
 
-            if (!ws) {
+            if (ws.readyState !== 1) {
                 showMessage('no WebSocket connection');
                 return;
             }
+
 
             ws.send(val);
             showMessage(`Sent "${val}"`);

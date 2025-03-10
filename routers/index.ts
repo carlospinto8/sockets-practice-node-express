@@ -4,11 +4,10 @@ import { resolve } from 'path';
 import api from './api';
 
 const express = require('express');
-const path = require('path');
 
 export default function configure(app: Application) {
     app.get('/', (req, res, next) => {
-            res.sendFile(resolve(__dirname, '../index.html'));
+            res.sendFile(resolve(__dirname, '../../index.html'));
         })
         .use(express.static('public'))
         .use(express.static('dist'))
@@ -23,10 +22,10 @@ export default function configure(app: Application) {
         .use((error: Error, req: Request, res: Response, next: NextFunction) => {
             switch (error.message) {
                 case 'Not Found':
-                    res.sendFile(resolve(__dirname, '../static-files/notfound.html'));
+                    res.sendFile(resolve('static-files', 'notfound.html'));
                     return;
             }
 
-            res.sendFile(resolve(__dirname, '../static-files/error.html'));
+            res.sendFile(resolve('static-files', 'error.html'));
         });
 }

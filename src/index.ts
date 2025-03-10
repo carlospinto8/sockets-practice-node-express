@@ -12,12 +12,13 @@ const port = process.env.PORT ?? 3000;
 
 // HTTP server is error handling
 function onSocketPreError(e: Error) {
-  console.log(e.message);
+  console.log('Error occurred before upgrading: ' + e.message);
+
 }
 
 // Web socket server is error handling
 function onSocketPostError(e: Error) {
-  console.log(e.message);
+  console.log('Error occurred after upgrading: ' + e.message);
 }
 
 configure(app);
@@ -36,12 +37,8 @@ s.on('upgrade', (req: any, socket: any, head: any) => {
   // Before officially upgraded and emitted to the server
   socket.on('error', onSocketPreError); 
 
-  // Perform auth here
-  if (!req.headers['BadAuth']) {
-    socket.write('HTTP/1.1 401 Unauthorized\r\n\r\n');
-    socket.destroy();
-    return;
-  }
+  // TODO: Perform auth here
+
 
   // Use our three arguments and a call back which will get the web socket itself
   wss.handleUpgrade(req, socket, head, (ws) => {
