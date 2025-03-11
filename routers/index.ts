@@ -5,7 +5,7 @@ import api from './api';
 
 const express = require('express');
 
-export default function configure(app: Application) {
+export default function configureRoutes(app: Application) {
     app.get('/', (req, res, next) => {
             res.sendFile(resolve(__dirname, '../../index.html'));
         })
