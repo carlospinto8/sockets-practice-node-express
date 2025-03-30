@@ -2,6 +2,8 @@ import { Application, Request, Response, NextFunction } from 'express';
 import { json } from 'body-parser';
 import { resolve } from 'path';
 import api from './api';
+import { COOKIE_SECRET } from '../utils';
+import cookieParser from 'cookie-parser';
 
 const express = require('express');
 
@@ -12,6 +14,7 @@ export default function configureRoutes(app: Application) {
         .use(express.static('public'))
         .use(express.static('dist'))
         .use(json())
+        .use(cookieParser(COOKIE_SECRET))
         .use('/api', api())
         .use('/error', (req, res, next) => {
             next(new Error('Other Error'));
